@@ -1,0 +1,88 @@
+body{
+   background-repeat: no-repeat;
+   background-size: cover;
+    background-image: url(https://picsum.photos/1263/601);
+    height: 100vh;
+    overflow:hidden;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.container_today{
+    background-color: #000005b5;
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.weather_today{
+    margin-top: -10px;    
+
+}
+.city{
+    font-size: 2em;
+    
+    
+}
+.time_tool{
+    font-size: 2em;
+}
+.city_container{
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   flex-grow: 8;
+   justify-content: center;
+}
+.city{
+    font-size: 3em;
+    
+}
+.inp{
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.location_inp{
+    border-radius: 5px;
+    height: 20px;
+    width: 60%;
+
+}
+.material-icons{
+    margin: 5px;
+    size: inherit;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.inp{
+    justify-content: center;
+
+}
+.container_future{
+    display: flex;
+    justify-content: space-between;
+    overflow-x: auto;
+    text-decoration: none;
+}
+.f_days{
+    border: 1px solid white;
+    background-color: #050002e7;
+    color: white;
+    padding-top: 0px !important;
+    padding: 40px;
+    margin: auto;
+    margin-top: 50px !important;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+    margin: 5px;
+   
+}
+.future_day{
+    font-size: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
