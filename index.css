@@ -7,7 +7,7 @@ body{
     font-family: 'Source Sans Pro', sans-serif;
 }
 .container_today{
-    background-color: #000005b5;
+    background-color: #000005d5;
     padding: 10px;
     color: white;
     display: flex;
@@ -15,7 +15,10 @@ body{
     
 }
 .weather_today{
-    margin-top: -10px;    
+    text-align: left;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px;
 
 }
 .city{
@@ -24,7 +27,7 @@ body{
     
 }
 .time_tool{
-    font-size: 2em;
+    font-size: 1.5em;
 }
 .city_container{
    text-align: center;
@@ -76,7 +79,7 @@ body{
     margin: auto;
     margin-top: 50px !important;
     justify-content: center;
-    text-align: center;
+    text-align: left;
     border-radius: 5px;
     margin: 5px;
    
@@ -85,4 +88,14 @@ body{
     font-size: 30px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
+}
+.search_btn {
+    margin: 2px;
+
+
+}
+.location_indicator{
+    text-align: center;
+    background-color: #050002e7;
+    color: white;
 }

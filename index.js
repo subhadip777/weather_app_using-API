@@ -1,9 +1,7 @@
-let weather={
 
-    "Api":'55e2fd4f99d1bb0bc852823c8ec4ad78',
-}
+// const cityname=document.getElementById("cityname");
 
-const cityname=document.getElementById("cityname");
+
 function getCoordintes() {
 	var options = {
 		enableHighAccuracy: true,
@@ -65,19 +63,122 @@ setInterval(()=>{
     const day=time.getDay();
     const year=time.getFullYear();
     const ampm=hour>13 ?"pm":'am';
-    console.log(hour);
-    console.log(seconds);
-    const days=['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THRUSDAY','FRIDAY','SATURNDAY'];
+    const days=['SUN DAY','MON DAY','TUES DAY','WEDNES DAY','THRUS DAY','FRI DAY','SATURN DAY'];
     const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
     $(".time").text(hour+":"+minutes+':'+seconds+" "+ampm);
     $(".date_mon").text(months[month]+" "+date+" "+days[day]+" "+year);
 
 
 },1000)
+ const API_KEY='55e2fd4f99d1bb0bc852823c8ec4ad78';
+ function getWeatherData(){
+	 navigator.geolocation.getCurrentPosition((success)=>{
+		 let{latitude, longitude}=success.coords;
+		 fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`).then(res=>res.json()).then(
+			 data=>{
+				 console.log(data);
+				showWeatherData(data); 
+			 }
+		 )
+	 })
+
+
+	
+ }
+
 
 window.onload=function(){
     getCoordintes();
+	getWeatherData();
 }
+function showWeatherData(data){
+	let{humidity,pressure,sunrise,sunset,wind_speed,temp,feels_like}=data.current;
+	let{icon}=data.current.weather[0];
+	console.log(icon);
+	$(".weather_today").html(
+		`
+		<img src="http://openweathermap.org/img/wn/${icon}@2x.png" class="cloud_icon"/>
+                <div class="temp">temparature:${temp}°C</div>
+                <div class="temp_details">
+                    <div class="precipitation">Precipitation:${pressure} %</div>
+                    <div class="Humidity">Humidity:${humidity}%</div>
+                    <div class="Wind">Air speed:${wind_speed} km/h</div>
+                </div>
+		`
+	)
+
+	let daily=data.daily;
+	const days=['SUN DAY','MON DAY','TUES DAY','WEDNES DAY','THRUS DAY','FRI DAY','SATURN DAY'];
+	const time=new Date();
+	const day=time.getDay();
+	const d=day;
+	$(".container_future").html(
+
+
+		`
+		<div class="f_days">
+		<div class="future_day">${d+1>6 ?days[d-7+1].toLowerCase():days[d+1].toLowerCase()}</div>
+		<img src="http://openweathermap.org/img/wn/${daily[1].weather[0].icon}@2x.png"/>
+		<div class="temp_details">
+			<div class="cloud">Cloud:${daily[1].clouds}</div>
+			<div class="Humidity">Humidity:${daily[1].humidity}%</div>
+			<div class="Wind">Air speed:${daily[1].wind_speed} km/h</div>
+		</div>
+
+	</div>
+	<div class="f_days">
+                <div class="future_day">${d+2>6 ?days[d-7+2].toLowerCase():days[d+2].toLowerCase()}</div>
+                <img src="http://openweathermap.org/img/wn/${daily[2].weather[0].icon}@2x.png"/>
+                <div class="temp_details">
+					<div class="cloud">Cloud:${daily[2].clouds}</div>
+                    <div class="Humidity">Humidity:${daily[2].humidity}%</div>
+                    <div class="Wind">Air speed:${daily[2].wind_speed} km/h</div>
+                </div>
+
+            </div>
+			<div class="f_days">
+                <div class="future_day">${d+3>6 ?days[d-7+3].toLowerCase():days[d+3].toLowerCase()}</div>
+                <img src="http://openweathermap.org/img/wn/${daily[3].weather[0].icon}@2x.png"/>
+                <div class="temp_details">
+                    <div class="cloud">Cloud:${daily[3].clouds}</div>
+                    <div class="Humidity">Humidity:${daily[3].humidity}%</div>
+                    <div class="Wind">Air speed:${daily[3].wind_speed} km/h</div>
+                </div>
+
+            </div>
+			<div class="f_days">
+                <div class="future_day">${d+4>6 ?days[d-7+4].toLowerCase():days[d+4].toLowerCase()}</div>
+                <img src="http://openweathermap.org/img/wn/${daily[4].weather[0].icon}@2x.png"/>
+                <div class="temp_details">
+					<div class="cloud">Cloud:${daily[4].clouds}</div>
+                    <div class="Humidity">Humidity:${daily[4].humidity}%</div>
+                    <div class="Wind">Air speed:${daily[4].wind_speed} km/h</div>
+                </div>
+
+            </div>
+			<div class="f_days">
+                <div class="future_day">${d+5>6 ?days[d-7+5].toLowerCase():days[d+5].toLowerCase()}</div>
+                <img src="http://openweathermap.org/img/wn/${daily[5].weather[0].icon}@2x.png"/>
+                <div class="temp_details">
+					<div class="cloud">Cloud:${daily[5].clouds}</div>
+                    <div class="Humidity">Humidity:${daily[5].humidity}%</div>
+                    <div class="Wind">Air speed:${daily[5].wind_speed} km/h</div>
+                </div>
+
+            </div>
+		`
+	)
+
+}
+function searchFunction(){
+	console.log("clicked the search btn");
+	let search_city=$("#search_bar").val();
+	console.log(search_city);
+
+}
+
+
+
 
 
 
