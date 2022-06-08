@@ -86,6 +86,18 @@ setInterval(()=>{
 	
  }
 
+ function getWeatherDataonsearch(coordinates){
+	 let latitude=coordinates[0];
+	 let longitude=coordinates[1];
+	 fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`).then(res=>res.json()).then(
+			 data=>{
+				 console.log(data);
+				showWeatherData(data); 
+			 }
+		 )
+
+ }
+
 
 window.onload=function(){
     getCoordintes();
@@ -173,7 +185,21 @@ function showWeatherData(data){
 function searchFunction(){
 	console.log("clicked the search btn");
 	let search_city=$("#search_bar").val();
-	console.log(search_city);
+	fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${search_city}&limit=5&appid=${API_KEY}`).then(res=>res.json()).then(
+		data=>{
+			console.log(data);
+			let{lat,lon}=data[0];
+			let coordinates=[lat,lon];
+			search_city=search_city.toString();
+			let res=search_city.toUpperCase();
+			$("#city_name").text(res);
+			$(".location_indicator_name").text("Showing Weather of "+search_city);
+			$("#latitude").text("Latitude :"+lat);
+            $("#longitude").text("Longitude :"+lon);
+			getWeatherDataonsearch(coordinates);
+		}
+	)
+	
 
 }
 
